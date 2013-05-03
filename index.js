@@ -79,10 +79,8 @@ module.exports = function(connect, dir) {
         }
 
         list = top ? list.slice(skip, skip + top) : list.slice(skip);
-        console.log(top)
         if(top == 1) {
             params.id = list[0].Id;
-            console.log(params.id)
             return getListItem(req, res, params, splats);
         }
         var body = JSON.stringify({
@@ -120,6 +118,7 @@ module.exports = function(connect, dir) {
         .use(function(req, res, next) {
         var url = req.url;
         url = trimSlash(url);
+        url = trimSubsite(url);
         url = normalizeIdReq(url);
         url = trimQuery(url);
 
@@ -137,6 +136,11 @@ module.exports = function(connect, dir) {
 function trimSlash(str) {
     return (str.substr(-1) === '/' && str.length > 1) ? str.slice(0, -1) : str;
 };
+// ignore subsite
+
+function trimSubsite(str) {
+    return str.replace(/(.*)(\/_vti_bin\/ListData\.svc)(.*)/, '$2$3');
+}
 // remove query string
 
 function trimQuery(str) {
