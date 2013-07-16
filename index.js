@@ -59,7 +59,7 @@ module.exports = function(connect, dir) {
         if (typeof orderby === 'string') {
             var re = /(\S+) ?(asc|desc)?/;
             var match = orderby.match(re);
-            var direction = match[2];
+            var direction = match[2] || 'asc';
             orderby = match[1];
 
             if (_.has(list[0], orderby)) {
