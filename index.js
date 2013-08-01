@@ -109,9 +109,9 @@ module.exports = function(connect, dir) {
     }
 
     var router = new require('routes').Router();
-    router.addRoute('/:subsite?/_vti_bin/listData.svc/:list/:id', getListItem);
-    router.addRoute('/:subsite?/_vti_bin/listData.svc/:list', getList);
-    router.addRoute('/:subsite?/_vti_bin/listData.svc', getLists);
+    router.addRoute('/_vti_bin/listData.svc/:list/:id', getListItem);
+    router.addRoute('/_vti_bin/listData.svc/:list', getList);
+    router.addRoute('/_vti_bin/listData.svc', getLists);
 
     return connect()
         .use(connect.query())
@@ -139,7 +139,7 @@ function trimSlash(str) {
 // ignore subsite
 
 function trimSubsite(str) {
-    return str.replace(/(.*)(\/_vti_bin\/ListData\.svc)(.*)/, '$2$3');
+    return str.replace(/(.*)(\/_vti_bin\/ListData\.svc)(.*)/i, '$2$3');
 }
 // remove query string
 
