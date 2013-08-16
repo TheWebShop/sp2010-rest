@@ -31,10 +31,10 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'nodeunit']
       }
     },
-    vows: {
+    mochaTest: {
       all: {
         options: {
-          reporter: "spec"
+          reporter: 'spec'
         },
         src: ['test/**/*_test.js']
       }
@@ -43,8 +43,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-vows');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
-  grunt.registerTask('default', ['jshint', 'vows']);
+  grunt.registerTask('default', ['jshint', 'mochaTest']);
 
 };
